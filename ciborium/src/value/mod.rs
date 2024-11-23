@@ -45,6 +45,9 @@ pub enum Value {
 
     /// A map
     Map(Vec<(Value, Value)>),
+
+    /// Simple
+    Simple(u8),
 }
 
 impl Value {
