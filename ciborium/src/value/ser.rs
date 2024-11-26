@@ -12,7 +12,7 @@ impl ser::Serialize for Value {
         match self {
             Value::Bytes(x) => serializer.serialize_bytes(x),
             Value::Bool(x) => serializer.serialize_bool(*x),
-            Value::Simple(x) => serializer.serialize_simple(*x),
+            Value::Simple(x) => serializer.serialize_u8(*x),
             Value::Text(x) => serializer.serialize_str(x),
             Value::Null => serializer.serialize_unit(),
 
@@ -122,7 +122,6 @@ impl ser::Serializer for Serializer<()> {
 
     mkserialize! {
         serialize_bool(bool),
-        serialize_simple(u8),
 
         serialize_f32(f32),
         serialize_f64(f64),

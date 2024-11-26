@@ -63,7 +63,6 @@ impl<'de> serde::de::Visitor<'de> for Visitor {
 
     mkvisit! {
         visit_bool(bool),
-        visit_simple(u8),
         visit_f32(f32),
         visit_f64(f64),
 
@@ -237,7 +236,7 @@ impl<'a, 'de> de::Deserializer<'de> for Deserializer<&'a Value> {
             Value::Map(x) => visitor.visit_map(Deserializer(x.iter().peekable())),
             Value::Bool(x) => visitor.visit_bool(*x),
             Value::Null => visitor.visit_none(),
-            Value::Simple(x) => visitor.visit_simple(*x),
+            Value::Simple(x) => visitor.visit_u8(*x),
 
             Value::Tag(t, v) => {
                 let parent: Deserializer<&Value> = Deserializer(v);
